@@ -1,3 +1,6 @@
+package models
+
+import constants.MAX_CAPACITY
 import exceptions.InvalidSpotException
 import exceptions.SpotIsOccupiedException
 

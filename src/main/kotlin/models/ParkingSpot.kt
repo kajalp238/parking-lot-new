@@ -1,3 +1,5 @@
+package models
+
 class ParkingSpot(private var spotNumber: Int) {
 
     private var vehicle: VehicleType? = null

@@ -1,7 +1,11 @@
 import exceptions.InvalidSpotException
 import exceptions.SpotIsOccupiedException
+import models.ParkingLot
+import models.Ticket
+import models.VehicleType
 import org.junit.jupiter.api.Assertions.*
 import org.testng.annotations.Test
+import services.ParkingLotService
 
 class ParkingLotServiceTest {
 
@@ -23,7 +27,7 @@ class ParkingLotServiceTest {
         val receipt = parkingLotService.unpark(ticket)
 
         assertEquals(1, receipt.getReceiptNumber())
-    }
+    }-
 
     @Test
     fun `it should throw an exception as unparking the vehicle which is not parked`() {

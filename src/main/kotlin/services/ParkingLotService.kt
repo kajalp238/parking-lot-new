@@ -1,7 +1,12 @@
+package services
+
+import constants.MAX_CAPACITY
 import exceptions.ParkingLotIsFullException
+import models.*
 
 var ticketNumber = 1
 var receiptNumber = 1
+
 class ParkingLotService {
 
     private val parkingLot: ParkingLot = ParkingLot()
