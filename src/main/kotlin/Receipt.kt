@@ -1,22 +1,23 @@
+import java.time.Duration
 import java.time.LocalDateTime
 
-class Receipt(ticket: Ticket) {
+class Receipt(ticket: Ticket, private val receiptNumber: Int,private val exitTime: LocalDateTime? = LocalDateTime.now()) {
 
-    private var receiptNumber: Int = 1
     private var entryTime = ticket.getEntryTime()
-    private var exitTime = LocalDateTime.now()
-    private var parkingFee: Long = 0
+    private var parkingCharge: Long = 0
 
     fun getReceiptNumber(): Int {
         return receiptNumber
     }
 
-    private fun generateReceiptNumber(): Int {
-        return receiptNumber++
+    fun generateReceipt(): Receipt {
+        parkingCharge = calculateParkingCharge()
+        return this
     }
 
-    fun getParkingFee(): Long {
-        return parkingFee
+    fun calculateParkingCharge(): Long {
+        val duration = Duration.between(entryTime, exitTime).toHours()
+        return duration * VEHICLE_PER_HOUR_CHARGE
     }
 
 }

@@ -27,7 +27,7 @@ class ParkingLotServiceTest {
 
     @Test
     fun `it should throw an exception as unparking the vehicle which is not parked`() {
-        val ticket = Ticket(1)
+        val ticket = Ticket(1, 1)
 
         assertThrows(InvalidSpotException::class.java) {
             ParkingLotService().unpark(ticket)

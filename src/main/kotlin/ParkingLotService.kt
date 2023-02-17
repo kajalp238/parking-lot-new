@@ -1,19 +1,21 @@
 import exceptions.ParkingLotIsFullException
 
+var ticketNumber = 1
+var receiptNumber = 1
 class ParkingLotService {
 
     private val parkingLot: ParkingLot = ParkingLot()
 
     fun park(vehicle: VehicleType): Ticket {
         val freeSpot = getFreeSlot() ?: throw ParkingLotIsFullException()
-        val ticket = Ticket(freeSpot.getSpotNumber())
+        val ticket = Ticket(freeSpot.getSpotNumber(), ticketNumber++)
         parkingLot.park(vehicle, freeSpot.getSpotNumber())
         return ticket
     }
 
     fun unpark(ticket: Ticket): Receipt {
         parkingLot.freeSpot(ticket.getParkingSpotNumber())
-        return Receipt(ticket).generateReceipt()
+        return Receipt(ticket, receiptNumber++).generateReceipt()
     }
 
 

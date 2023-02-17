@@ -1,13 +1,6 @@
 import java.time.LocalDateTime
 
-class Ticket(private var parkingSpotNumber: Int) {
-
-    private var ticketNumber: Int = 1
-    private var entryTime: LocalDateTime? = LocalDateTime.now()
-
-    private fun generateTicketNumber(): Int {
-        return ticketNumber++
-    }
+class Ticket(private var parkingSpotNumber: Int, private var ticketNumber: Int, private var entryTime: LocalDateTime? = LocalDateTime.now()) {
 
     fun getEntryTime(): LocalDateTime? {
         return entryTime
@@ -17,7 +10,7 @@ class Ticket(private var parkingSpotNumber: Int) {
         return parkingSpotNumber
     }
 
-    fun getTicketNumber():Int{
+    fun getTicketNumber(): Int {
         return ticketNumber
     }
 
