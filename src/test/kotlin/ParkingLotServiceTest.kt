@@ -27,7 +27,7 @@ class ParkingLotServiceTest {
         val receipt = parkingLotService.unpark(ticket)
 
         assertEquals(1, receipt.getReceiptNumber())
-    }-
+    }
 
     @Test
     fun `it should throw an exception as unparking the vehicle which is not parked`() {
