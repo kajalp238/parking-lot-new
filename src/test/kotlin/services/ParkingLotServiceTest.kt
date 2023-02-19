@@ -1,6 +1,7 @@
 package services
 
 import exceptions.VehicleIsNotParkedException
+import models.Receipt
 import models.Ticket
 import models.VehicleType
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -17,9 +18,8 @@ class ParkingLotServiceTest {
 
         val actualTicket = parkingLotService.park(VehicleType.CAR)
 
-        val ticketNumberField = actualTicket.javaClass.getDeclaredField("ticketNumber")
-        ticketNumberField.isAccessible = true
-        assertEquals(1, ticketNumberField.get(actualTicket))
+        val expectedTicket = Ticket(1, 1, actualTicket.getEntryTime())
+        assertEquals(expectedTicket, actualTicket)
 
     }
 
@@ -31,9 +31,8 @@ class ParkingLotServiceTest {
 
         val receipt = parkingLotService.unPark(ticket)
 
-        val receiptNumberField = receipt.javaClass.getDeclaredField("receiptNumber")
-        receiptNumberField.isAccessible = true
-        assertEquals(1, receiptNumberField.get(receipt))
+        val expectedReceipt = Receipt(1, 0, ticket.getEntryTime()!!)
+        assertEquals(expectedReceipt, receipt)
 
     }
 

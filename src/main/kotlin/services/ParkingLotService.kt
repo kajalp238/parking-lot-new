@@ -45,7 +45,7 @@ class ParkingLotService {
 
     private fun generateReceipt(ticket: Ticket): Receipt {
 
-        val exitTime = LocalDateTime.now()
+        val exitTime = LocalDateTime.now().withNano(0)
         val parkingFee = calculateParkingFee(ticket.getEntryTime()!!, exitTime)
 
         return Receipt(receiptNumber++, parkingFee, ticket.getEntryTime()!!, exitTime)

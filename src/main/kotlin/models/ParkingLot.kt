@@ -27,13 +27,12 @@ class ParkingLot {
     fun reserveSpot(vehicleType: VehicleType, spotNumber: Int): ParkingSpot {
 
         val spot = getSpot(spotNumber)!!
+        if(!spot.isFree()) throw SpotIsOccupiedException()
 
-        if (spot.isFree()) {
-            parkingSpots[spot.getSpotNumber()]?.assignVehicle(vehicleType)
-            return spot
-        }
+        parkingSpots[spotNumber]?.assignVehicle(vehicleType)
 
-        throw SpotIsOccupiedException()
+        return spot
+
     }
 
     fun freeSpot(spotNumber: Int): ParkingSpot {
@@ -41,7 +40,7 @@ class ParkingLot {
         val spot = getSpot(spotNumber)!!
         if (spot.isFree()) throw VehicleIsNotParkedException()
 
-        spot.unAssignVehicle()
+        parkingSpots[spotNumber]?.unAssignVehicle()
 
         return spot
     }
