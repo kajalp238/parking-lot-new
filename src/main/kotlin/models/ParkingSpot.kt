@@ -23,4 +23,5 @@ class ParkingSpot(private var spotNumber: Int) {
     fun unAssignVehicle() {
         vehicleType = null
     }
+
 }

@@ -1,16 +1,30 @@
 package models
 
+import models.VehicleType.CAR
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
 
 class ParkingSpotTest {
 
     @Test
-    fun assignVehicle() {
+    fun `it should assign vehicle to parking spot`() {
+
+        val parkingSpot = ParkingSpot(1)
+
+        parkingSpot.assignVehicle(CAR)
+
+        assertEquals(CAR, parkingSpot.getParkedVehicleType())
+
     }
 
     @Test
-    fun unAssignVehicle() {
+    fun `it should free the spot`() {
+
+        val parkingSpot = ParkingSpot(1)
+
+        parkingSpot.unAssignVehicle()
+
+        assertEquals(null, parkingSpot.getParkedVehicleType())
+
     }
 }
