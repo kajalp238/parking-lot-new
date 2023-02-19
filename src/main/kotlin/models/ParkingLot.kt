@@ -1,26 +1,25 @@
 package models
 
 import constants.MAX_CAPACITY
-import exceptions.InvalidSpotException
-import exceptions.SpotIsOccupiedException
+import exceptions.*
 
 class ParkingLot {
 
-    private val spots: MutableList<ParkingSpot?> = MutableList(MAX_CAPACITY + 1) { null }
+    private val parkingSpots: MutableList<ParkingSpot?> = MutableList(MAX_CAPACITY + 1) { null }
 
     fun getSpot(spotNumber: Int): ParkingSpot? {
         if (spotNumber > MAX_CAPACITY || spotNumber <= 0)
             throw InvalidSpotException()
-        if (spots[spotNumber] == null)
-            spots[spotNumber] = ParkingSpot(spotNumber)
-        return spots[spotNumber]
+        if (parkingSpots[spotNumber] == null)
+            parkingSpots[spotNumber] = ParkingSpot(spotNumber)
+        return parkingSpots[spotNumber]
 
     }
 
     fun park(vehicle: VehicleType, spotNumber: Int): ParkingSpot {
         val spot = getSpot(spotNumber)!!
         if (spot.isFree()) {
-            spots[spot.getSpotNumber()]?.assignVehicle(vehicle)
+            parkingSpots[spot.getSpotNumber()]?.assignVehicle(vehicle)
             return spot
         }
         throw SpotIsOccupiedException()
@@ -29,8 +28,8 @@ class ParkingLot {
     fun freeSpot(spotNumber: Int): ParkingSpot {
         val spot = getSpot(spotNumber)!!
         if (spot.getParkedVehicle() == null)
-            throw InvalidSpotException()
-        spot.unassignVehicle()
+            throw NoVehicleParkedException()
+        spot.unAssignVehicle()
         return spot
     }
 
