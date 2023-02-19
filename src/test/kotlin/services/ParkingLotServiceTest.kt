@@ -49,23 +49,28 @@ class ParkingLotServiceTest {
     }
 
     @Test
-    fun `it should calculate parking fee`(){
+    fun `it should calculate parking fee`() {
 
         val parkingLotService = ParkingLotService()
 
-        val actualFee = parkingLotService.calculateParkingFee(LocalDateTime.of(2023, 2, 4, 0, 0), LocalDateTime.of(2023, 2, 4 ,5, 0))
+        val actualFee = parkingLotService.calculateParkingFee(
+            LocalDateTime.of(2023, 2, 4, 0, 0),
+            LocalDateTime.of(2023, 2, 4, 5, 0)
+        )
 
         assertEquals(50, actualFee)
 
     }
 
     @Test
-    fun `it should calculate parking fee when car is parked for some minutes`(){
+    fun `it should calculate parking fee when car is parked for some minutes`() {
 
         val parkingLotService = ParkingLotService()
 
-        val actualFee = parkingLotService.calculateParkingFee(LocalDateTime.of(2023, 2, 4, 5, 0),
-                                LocalDateTime.of(2023, 2, 4 ,5, 15))
+        val actualFee = parkingLotService.calculateParkingFee(
+            LocalDateTime.of(2023, 2, 4, 5, 0),
+            LocalDateTime.of(2023, 2, 4, 5, 15)
+        )
 
         assertEquals(10, actualFee)
 

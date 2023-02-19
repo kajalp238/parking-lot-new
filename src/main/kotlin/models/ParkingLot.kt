@@ -10,7 +10,7 @@ class ParkingLot {
     private val parkingSpots = mutableListOf<ParkingSpot?>()
 
     init {
-        for(spotNumber in 0..MAX_CAPACITY){
+        for (spotNumber in 0..MAX_CAPACITY) {
             parkingSpots.add(ParkingSpot(spotNumber))
         }
     }

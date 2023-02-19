@@ -24,7 +24,7 @@ class ParkingSpotTest {
 
         parkingSpot.unAssignVehicle()
 
-        assertEquals(null, parkingSpot.getParkedVehicleType())
+        assertEquals(true, parkingSpot.isFree())
 
     }
 }
