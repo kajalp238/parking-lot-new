@@ -5,7 +5,7 @@ import exceptions.*
 
 class ParkingLot {
 
-    private val parkingSpots: MutableList<ParkingSpot?> = MutableList(MAX_CAPACITY + 1) { null }
+    private val parkingSpots: MutableList<ParkingSpot?> = MutableList(MAX_CAPACITY + 1) { ParkingSpot(-1) }
 
     fun getSpot(spotNumber: Int): ParkingSpot? {
         if (spotNumber > MAX_CAPACITY || spotNumber <= 0)
@@ -27,7 +27,7 @@ class ParkingLot {
 
     fun freeSpot(spotNumber: Int): ParkingSpot {
         val spot = getSpot(spotNumber)!!
-        if (spot.getParkedVehicle() == null)
+        if (spot.getParkedVehicleType() == null)
             throw NoVehicleParkedException()
         spot.unAssignVehicle()
         return spot

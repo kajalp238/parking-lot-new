@@ -4,17 +4,16 @@ import constants.MAX_CAPACITY
 import exceptions.ParkingLotIsFullException
 import models.*
 
-var ticketNumber = 1
-var receiptNumber = 1
-
 class ParkingLotService {
 
     private val parkingLot: ParkingLot = ParkingLot()
+    private var ticketNumber = 1
+    private var receiptNumber = 1
 
-    fun park(vehicle: VehicleType): Ticket {
+    fun park(vehicleType: VehicleType): Ticket {
         val freeSpot = getFreeSlot() ?: throw ParkingLotIsFullException()
         val ticket = Ticket(freeSpot.getSpotNumber(), ticketNumber++)
-        parkingLot.park(vehicle, freeSpot.getSpotNumber())
+        parkingLot.park(vehicleType, freeSpot.getSpotNumber())
         return ticket
     }
 
@@ -27,11 +26,12 @@ class ParkingLotService {
     private fun getFreeSlot(): ParkingSpot? {
         for (spotNumber in 1..MAX_CAPACITY) {
             val spot = parkingLot.getSpot(spotNumber)!!
-            if (spot.getParkedVehicle() == null)
+            if (spot.getParkedVehicleType() == null)
                 return spot
         }
         return null
     }
+
 
 
 }

@@ -4,7 +4,7 @@ class ParkingSpot(private var spotNumber: Int) {
 
     private var vehicleType: VehicleType? = null
 
-    fun getParkedVehicle(): VehicleType? {
+    fun getParkedVehicleType(): VehicleType? {
         return vehicleType
     }
 
