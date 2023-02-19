@@ -1,30 +1,10 @@
 package models
 
-import constants.VEHICLE_PER_HOUR_CHARGE
-import java.time.Duration
 import java.time.LocalDateTime
 
-class Receipt(
-    ticket: Ticket,
+data class Receipt(
     private val receiptNumber: Int,
+    private val parkingFee: Long,
+    private val entryTime: LocalDateTime,
     private val exitTime: LocalDateTime? = LocalDateTime.now()
-) {
-
-    private var entryTime = ticket.getEntryTime()
-    private var parkingCharge: Long = 0
-
-    fun getReceiptNumber(): Int {
-        return receiptNumber
-    }
-
-    fun generateReceipt(): Receipt {
-        parkingCharge = calculateParkingCharge()
-        return this
-    }
-
-    fun calculateParkingCharge(): Long {
-        val duration = Duration.between(entryTime, exitTime).toHours()
-        return duration * VEHICLE_PER_HOUR_CHARGE
-    }
-
-}
+)
