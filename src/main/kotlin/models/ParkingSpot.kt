@@ -2,10 +2,10 @@ package models
 
 class ParkingSpot(private var spotNumber: Int) {
 
-    private var vehicle: VehicleType? = null
+    private var vehicleType: VehicleType? = null
 
     fun getParkedVehicle(): VehicleType? {
-        return vehicle
+        return vehicleType
     }
 
     fun getSpotNumber(): Int {
@@ -13,14 +13,14 @@ class ParkingSpot(private var spotNumber: Int) {
     }
 
     fun isFree(): Boolean {
-        return vehicle == null
+        return vehicleType == null
     }
 
-    fun assignVehicle(vehicle: VehicleType) {
-        this.vehicle = vehicle
+    fun assignVehicle(vehicleType: VehicleType) {
+        this.vehicleType = vehicleType
     }
 
-    fun unassignVehicle() {
-        vehicle = null
+    fun unAssignVehicle() {
+        vehicleType = null
     }
 }

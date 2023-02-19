@@ -24,7 +24,7 @@ class ParkingLotServiceTest {
         val parkingLotService = ParkingLotService()
         val ticket = parkingLotService.park(VehicleType.CAR)
 
-        val receipt = parkingLotService.unpark(ticket)
+        val receipt = parkingLotService.unPark(ticket)
 
         assertEquals(1, receipt.getReceiptNumber())
     }
@@ -34,7 +34,7 @@ class ParkingLotServiceTest {
         val ticket = Ticket(1, 1)
 
         assertThrows(InvalidSpotException::class.java) {
-            ParkingLotService().unpark(ticket)
+            ParkingLotService().unPark(ticket)
         }
     }
 

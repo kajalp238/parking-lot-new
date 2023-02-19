@@ -18,7 +18,7 @@ class ParkingLotService {
         return ticket
     }
 
-    fun unpark(ticket: Ticket): Receipt {
+    fun unPark(ticket: Ticket): Receipt {
         parkingLot.freeSpot(ticket.getParkingSpotNumber())
         return Receipt(ticket, receiptNumber++).generateReceipt()
     }
