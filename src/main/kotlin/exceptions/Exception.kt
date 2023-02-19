@@ -6,4 +6,4 @@ class SpotIsOccupiedException : Exception("Spot is already occupied")
 
 class ParkingLotIsFullException : Exception("Parking lot is full")
 
-class VehicleIsNotParkedException : Exception("Vehicle is not parked")
+class InvalidTicketException : Exception("Ticket is not valid")

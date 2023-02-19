@@ -12,6 +12,10 @@ data class Ticket(
         return entryTime
     }
 
+    fun getTicketNumber(): Int {
+        return ticketNumber
+    }
+
     fun getParkingSpotNumber(): Int {
         return parkingSpotNumber
     }

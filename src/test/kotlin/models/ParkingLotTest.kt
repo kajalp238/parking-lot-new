@@ -2,7 +2,6 @@ package models
 
 import exceptions.InvalidSpotException
 import exceptions.SpotIsOccupiedException
-import exceptions.VehicleIsNotParkedException
 import org.hamcrest.CoreMatchers
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -40,17 +39,6 @@ class ParkingLotTest {
 
         assertThrows(SpotIsOccupiedException::class.java) {
             parkingLot.reserveSpot(VehicleType.CAR, 1)
-        }
-
-    }
-
-    @Test
-    fun `it should throw VehicleIsNotParkedException`() {
-
-        val parkingLot = ParkingLot()
-
-        assertThrows(VehicleIsNotParkedException::class.java) {
-            parkingLot.freeSpot(1)
         }
 
     }

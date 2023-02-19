@@ -1,6 +1,6 @@
 package services
 
-import exceptions.VehicleIsNotParkedException
+import exceptions.InvalidTicketException
 import models.Receipt
 import models.Ticket
 import models.VehicleType
@@ -37,11 +37,11 @@ class ParkingLotServiceTest {
     }
 
     @Test
-    fun `it should throw an exception as unparking the vehicle which is not parked`() {
+    fun `it should throw an exception as ticket is not valid`() {
 
         val ticket = Ticket(1, 1)
 
-        assertThrows(VehicleIsNotParkedException::class.java) {
+        assertThrows(InvalidTicketException::class.java) {
             ParkingLotService().unPark(ticket)
         }
 

@@ -3,7 +3,6 @@ package models
 import constants.MAX_CAPACITY
 import exceptions.InvalidSpotException
 import exceptions.SpotIsOccupiedException
-import exceptions.VehicleIsNotParkedException
 
 class ParkingLot {
 
@@ -27,7 +26,7 @@ class ParkingLot {
     fun reserveSpot(vehicleType: VehicleType, spotNumber: Int): ParkingSpot {
 
         val spot = getSpot(spotNumber)!!
-        if(!spot.isFree()) throw SpotIsOccupiedException()
+        if (!spot.isFree()) throw SpotIsOccupiedException()
 
         parkingSpots[spotNumber]?.assignVehicle(vehicleType)
 
@@ -38,7 +37,6 @@ class ParkingLot {
     fun freeSpot(spotNumber: Int): ParkingSpot {
 
         val spot = getSpot(spotNumber)!!
-        if (spot.isFree()) throw VehicleIsNotParkedException()
 
         parkingSpots[spotNumber]?.unAssignVehicle()
 

@@ -2,6 +2,7 @@ package services
 
 import constants.MAX_CAPACITY
 import constants.VEHICLE_PER_HOUR_CHARGE
+import exceptions.InvalidTicketException
 import exceptions.ParkingLotIsFullException
 import models.*
 import java.time.Duration
@@ -10,23 +11,30 @@ import java.time.LocalDateTime
 class ParkingLotService {
 
     private val parkingLot: ParkingLot = ParkingLot()
-    private var ticketNumber = 1
-    private var receiptNumber = 1
+    private val validTickets = mutableMapOf<Int, Int>()
 
     fun park(vehicleType: VehicleType): Ticket {
 
         val freeSpot = getFreeSpot()
-        val ticket = Ticket(freeSpot.getSpotNumber(), ticketNumber++)
 
         parkingLot.reserveSpot(vehicleType, freeSpot.getSpotNumber())
 
-        return ticket
+        val ticketNumber = Generator.nextTicketNumber()
+        validTickets[freeSpot.getSpotNumber()] = ticketNumber
+
+        return Ticket(freeSpot.getSpotNumber(), ticketNumber)
 
     }
 
     fun unPark(ticket: Ticket): Receipt {
 
-        parkingLot.freeSpot(ticket.getParkingSpotNumber())
+        val spotNumber = ticket.getParkingSpotNumber()
+
+        if (ticket.getTicketNumber() != validTickets[spotNumber])
+            throw InvalidTicketException()
+
+        validTickets[spotNumber] = -1
+        parkingLot.freeSpot(spotNumber)
 
         return generateReceipt(ticket)
 
@@ -48,7 +56,7 @@ class ParkingLotService {
         val exitTime = LocalDateTime.now().withNano(0)
         val parkingFee = calculateParkingFee(ticket.getEntryTime()!!, exitTime)
 
-        return Receipt(receiptNumber++, parkingFee, ticket.getEntryTime()!!, exitTime)
+        return Receipt(Generator.nextReceiptNumber(), parkingFee, ticket.getEntryTime()!!, exitTime)
 
     }
 
